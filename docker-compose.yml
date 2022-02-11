@@ -1,0 +1,23 @@
+version: "3"
+services:
+  postgres:
+    container_name: postgres_higgs_interview
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=higgs
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_higgs_volume_interview:/var/lib/postgresql/data_higgs_interview # persist data
+      - ./postgres:/docker-entrypoint-initdb.d
+
+volumes:
+  postgres_higgs_volume_interview:
+
+networks:
+  default:
